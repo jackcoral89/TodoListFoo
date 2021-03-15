@@ -1,9 +1,32 @@
 <h1>Todo App</h1>
 <div class="p-grid">
-    <div class="p-col">
-			<h2>TODO</h2>
-    </div>
-    <div class="p-col">
-			<h2>DONE</h2>
-    </div>
+	<div class="p-col">
+		<h2>TODO</h2>
+		<div class="p-d-flex">
+			<span class="p-float-label">
+				<input class="p-inputtext-lg" id="float-input" type="text" pInputText [(ngModel)]="todoListModel.Name">
+				<label for="float-input">Add a task</label>
+			</span>
+			<p-button label="Add" icon="pi pi-check" styleClass="p-button-lg p-ml-2" (click)="addTask(todoListModel.Name)"></p-button>
+		</div>
+
+		<!-- Todo list loop -->
+		<p-card *ngFor="let item of todoList" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+			<h4>{{ item.Name }}</h4>
+			<ng-template pTemplate="footer">
+        <p-button (click)="doneTask(item.Id)" label="Done" icon="pi pi-check"></p-button>
+        <p-button (click)="deleteTask(item.Id)" label="Delete" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+    </ng-template>
+		</p-card>
+	</div>
+	<div class="p-col">
+		<h2>DONE</h2>
+		<p-card *ngFor="let item of todoListDone" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+			<h4>{{ item.Name }}</h4>
+			<ng-template pTemplate="footer">
+        <p-button (click)="doneTask(item.Id)" label="Done" icon="pi pi-check"></p-button>
+        <p-button (click)="deleteTask(item.Id)" label="Delete" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+    </ng-template>
+		</p-card>
+	</div>
 </div>
