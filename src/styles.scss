@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital@0;1&display=swap');
+
+$main_font: 'Kanit', sans-serif;
+
+body {
+	font-family: $main_font;
+}
+
