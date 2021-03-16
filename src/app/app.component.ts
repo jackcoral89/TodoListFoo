@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListService } from 'src/services/todo-list.service';
-import { InputTextModule } from 'primeng/inputtext';
 import { TodoListModel } from 'src/models/todo-list.model';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-root',
@@ -23,18 +21,15 @@ export class AppComponent implements OnInit {
 
   public getTodoItems() {
     this.todoListService.getTodoItems().subscribe((response) => {
-      console.log('response', response);
-      this.todoList = response;
       let findCompleteTask = response.filter(item => item.IsComplete);
-      if (findCompleteTask) {
-        this.todoListDone = findCompleteTask;
-      }
+      let findOpenTask = response.filter(item => item.IsComplete == false);
+      this.todoList = findOpenTask;
+      this.todoListDone = findCompleteTask;
     });
   }
 
   public addTask(taskName: string) {
     this.todoListService.addTodoItem(taskName).subscribe((response) => {
-      console.log('response', response);
       this.todoListModel = new TodoListModel();
       this.getTodoItems();
     });
@@ -42,13 +37,13 @@ export class AppComponent implements OnInit {
   }
 
   public doneTask(idTask: number) {
-    this.todoListService.editTodoItem(idTask).subscribe((response) => {
+    this.todoListService.editTodoItem(idTask).subscribe(() => {
       this.getTodoItems();
     });
   }
 
   public deleteTask(idTask: number) {
-    this.todoListService.removeTodoItem(idTask).subscribe((response) => {
+    this.todoListService.removeTodoItem(idTask).subscribe(() => {
       this.getTodoItems();
     });
   }

@@ -10,9 +10,8 @@ import { Observable } from 'rxjs';
 export class TodoListService {
 
   public httpOptions = {
-		headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-		observe: 'response'
-	};
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(public httpClient: HttpClient) { }
 
@@ -21,7 +20,7 @@ export class TodoListService {
   }
 
   public addTodoItem(taskName: string): Observable<TodoListModel> {
-    return this.httpClient.post<TodoListModel>(environment.API_URL + '/api/TodoItems', { Name: taskName});
+    return this.httpClient.post<TodoListModel>(environment.API_URL + '/api/TodoItems', { Name: taskName }, this.httpOptions);
   }
 
   public removeTodoItem(idTask: number): Observable<TodoListModel> {
@@ -29,7 +28,11 @@ export class TodoListService {
   }
 
   public editTodoItem(idTask: number): Observable<TodoListModel> {
-    return this.httpClient.put<TodoListModel>(environment.API_URL + '/api/TodoItems/' + idTask, this.httpOptions);
+    const body = {
+      Id: idTask,
+      IsComplete: true
+    }
+    return this.httpClient.put<TodoListModel>(environment.API_URL + '/api/TodoItems/' + idTask, body, this.httpOptions);
   }
 
 }
