@@ -1,32 +1,38 @@
 <h1>Todo App</h1>
 <div class="p-grid">
-	<div class="p-col">
-		<h2>TODO</h2>
+	<div class="p-col-4">
 		<div class="p-d-flex">
 			<span class="p-float-label">
-				<input class="p-inputtext-lg" id="float-input" type="text" pInputText [(ngModel)]="todoListModel.Name">
+				<input class="p-inputtext" id="float-input" type="text" pInputText [(ngModel)]="todoListModel.Name">
 				<label for="float-input">Add a task</label>
 			</span>
-			<p-button label="Add" icon="pi pi-check" styleClass="p-button-lg p-ml-2" (click)="addTask(todoListModel.Name)"></p-button>
+			<button pButton pRipple class="p-button-raised p-ml-2" label="Add" icon="pi pi-plus" (click)="addTask(todoListModel.Name)"></button>
 		</div>
-
-		<!-- Todo list loop -->
-		<p-card *ngFor="let item of todoList" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-			<h4>{{ item.Name }}</h4>
+	</div>
+</div>
+<div class="p-grid">
+	<div class="p-col-4">
+		<h2>TODO</h2>
+		<p-card *ngFor="let item of todoList" [style]="{'width': '100%', 'margin-bottom': '1em'}">
+			<h3>{{ item.Name }}</h3>
 			<ng-template pTemplate="footer">
-        <p-button (click)="doneTask(item.Id)" label="Done" icon="pi pi-check"></p-button>
-        <p-button (click)="deleteTask(item.Id)" label="Delete" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
-    </ng-template>
+				<button pButton pRipple class="p-button-raised p-button-success" (click)="doneTask(item)" label="Done"
+					icon="pi pi-check"></button>
+				<button pButton pRipple class="p-button-raised p-button-danger p-ml-2" (click)="deleteTask(item.Id)"
+					label="Delete" icon="pi pi-trash"></button>
+			</ng-template>
 		</p-card>
 	</div>
-	<div class="p-col">
+	<div class="p-col-4">
 		<h2>DONE</h2>
-		<p-card *ngFor="let item of todoListDone" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-			<h4>{{ item.Name }}</h4>
+		<p-card *ngFor="let item of todoListDone" [style]="{'width': '100%', 'margin-bottom': '1em'}">
+			<h3>{{ item.Name }}</h3>
 			<ng-template pTemplate="footer">
-        <p-button (click)="doneTask(item.Id)" label="Done" icon="pi pi-check"></p-button>
-        <p-button (click)="deleteTask(item.Id)" label="Delete" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
-    </ng-template>
+				<button pButton pRipple class="p-button-raised p-button-success" (click)="doneTask(item.Id)" label="Done"
+					icon="pi pi-check"></button>
+				<button pButton pRipple class="p-button-raised p-button-danger p-ml-2" (click)="deleteTask(item.Id)"
+					label="Delete" icon="pi pi-trash"></button>
+			</ng-template>
 		</p-card>
 	</div>
 </div>

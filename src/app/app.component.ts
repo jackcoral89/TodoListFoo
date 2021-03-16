@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
       let findOpenTask = response.filter(item => item.IsComplete == false);
       this.todoList = findOpenTask;
       this.todoListDone = findCompleteTask;
+      console.log('this.todoListDone', this.todoListDone);
+      
     });
   }
 
@@ -36,8 +38,8 @@ export class AppComponent implements OnInit {
     
   }
 
-  public doneTask(idTask: number) {
-    this.todoListService.editTodoItem(idTask).subscribe(() => {
+  public doneTask(todoListModel: TodoListModel) {
+    this.todoListService.editTodoItem(todoListModel).subscribe(() => {
       this.getTodoItems();
     });
   }

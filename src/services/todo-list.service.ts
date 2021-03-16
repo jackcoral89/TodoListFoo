@@ -27,12 +27,14 @@ export class TodoListService {
     return this.httpClient.delete<TodoListModel>(environment.API_URL + '/api/TodoItems/' + idTask);
   }
 
-  public editTodoItem(idTask: number): Observable<TodoListModel> {
+  public editTodoItem(todoListModel: TodoListModel): Observable<TodoListModel> {
     const body = {
-      Id: idTask,
+      Id: todoListModel.Id,
+      Name: todoListModel.Name,
+      Content: todoListModel.Content,
       IsComplete: true
     }
-    return this.httpClient.put<TodoListModel>(environment.API_URL + '/api/TodoItems/' + idTask, body, this.httpOptions);
+    return this.httpClient.put<TodoListModel>(environment.API_URL + '/api/TodoItems/' + todoListModel.Id, body, this.httpOptions);
   }
 
 }
